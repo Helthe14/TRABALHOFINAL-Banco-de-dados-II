@@ -1,0 +1,31 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Sistema de Biblioteca{% endblock %}
+
+{% block content %}
+<h2>Bem-vindo ao Sistema de Biblioteca!</h2>
+<p>Utilize o menu acima para acessar as funcionalidades do sistema.</p>
+
+<!-- GALERIA DE LIVROS -->
+<div class="container gallery-container">
+    <h2>Galeria de Livros</h2>
+    <div class="gallery">
+        {% for livro in livros %}
+            <div class="gallery-item">
+                <div>
+                    <h3>{{ livro.nome }}</h3>
+                    <p><strong>Autor:</strong> {{ livro.autor }}</p>
+                    <p><strong>Ano:</strong> {{ livro.ano }}</p>
+                    <p><strong>Status:</strong> {{ livro.status.status }}</p>
+                </div>
+                {% if livro.imagem %}
+                    <img src="{{ livro.imagem }}" alt="{{ livro.nome }}">
+                {% else %}
+                    <img src="" alt="Imagem não disponível">
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

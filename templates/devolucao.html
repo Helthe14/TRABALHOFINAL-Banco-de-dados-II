@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Devolução de Livros{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Devolução de Livros</h1>
+
+    <!-- Exibe a mensagem de sucesso ou erro -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="message {{ messages[0][0] }}">
+                {{ messages[0][1] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Formulário de pesquisa com classes CSS -->
+    <form method="POST" class="search-form">
+        <input type="text" name="termo" placeholder="Digite o nome do livro" required class="form-control">
+        <button type="submit" class="btn-blue">Pesquisar</button>
+    </form>
+
+    <!-- Resultado da pesquisa -->
+    {% if termo and emprestimos %}
+        <h2>Resultados da Pesquisa:</h2>
+        <ul class="livros-list">
+            {% for emprestimo in emprestimos %}
+            <li>
+                <strong>Livro:</strong> {{ emprestimo.livro.nome }} <br>
+                <strong>Autor:</strong> {{ emprestimo.livro.autor }} <br>
+                <strong>Emprestado para:</strong> {{ emprestimo.aluno.nome }} (Matrícula: {{ emprestimo.aluno.matricula }}) <br>
+                <strong>Data do Empréstimo:</strong> {{ emprestimo.data.strftime('%d/%m/%Y %H:%M') }} <br>
+                <!-- Botão de devolução -->
+                <form method="POST" action="{{ url_for('devolucao') }}">
+                    <!-- Garantir que o livro_id seja passado corretamente -->
+                    <input type="hidden" name="livro_id" value="{{ emprestimo.livro.id }}">
+                    <button type="submit" class="btn-blue">Devolver Livro</button>
+                </form>
+            </li>
+            <br>
+            {% endfor %}
+        </ul>
+    {% elif termo %}
+        <p>Nenhum empréstimo encontrado para "{{ termo }}"</p>
+    {% endif %}
+
+    <!-- Lista de todos os livros emprestados -->
+    {% if not termo %}
+        <h2>Livros Emprestados</h2>
+        <ul class="livros-list">
+            {% for emprestimo in emprestimos %}
+            <li>
+                <strong>Livro:</strong> {{ emprestimo.livro.nome }} <br>
+                <strong>Autor:</strong> {{ emprestimo.livro.autor }} <br>
+                <strong>Emprestado para:</strong> {{ emprestimo.aluno.nome }} (Matrícula: {{ emprestimo.aluno.matricula }}) <br>
+                <strong>Data do Empréstimo:</strong> {{ emprestimo.data.strftime('%d/%m/%Y %H:%M') }} <br>
+                <!-- Botão de devolução -->
+                <form method="POST" action="{{ url_for('devolucao') }}">
+                    <!-- Garantir que o livro_id seja passado corretamente -->
+                    <input type="hidden" name="livro_id" value="{{ emprestimo.livro.id }}">
+                    <button type="submit" class="btn-blue">Devolver Livro</button>
+                </form>
+            </li>
+            <br>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}

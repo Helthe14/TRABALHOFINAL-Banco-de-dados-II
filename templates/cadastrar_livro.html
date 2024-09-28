@@ -1,0 +1,78 @@
+<!-- templates/cadastrar_livro.html -->
+{% extends 'base.html' %}
+
+{% block title %}Cadastrar ou Editar Livro{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Exibe a mensagem de sucesso ou erro APENAS para o cadastro de livros -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="message {{ messages[0][0] }}">
+                {{ messages[0][1] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="form-container">
+        <div class="cadastro-livro">
+            <h2>{{ livro.nome if livro else 'Cadastrar' }} Livro</h2>
+            <form method="POST">
+                <!-- Campo oculto para o ID do livro ao editar -->
+                {% if livro %}
+                <input type="hidden" name="id" value="{{ livro.id }}">
+                {% endif %}
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" value="{{ livro.nome if livro else '' }}" required class="form-control">
+                <br>
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" name="ano" value="{{ livro.ano if livro else '' }}" required class="form-control">
+                <br>
+                <label for="autor">Autor:</label>
+                <input type="text" id="autor" name="autor" value="{{ livro.autor if livro else '' }}" required class="form-control">
+                <br>
+                <label for="imagem">Link da Imagem:</label>
+                <input type="url" id="imagem" name="imagem" value="{{ livro.imagem if livro else '' }}" placeholder="https://example.com/imagem.jpg" required class="form-control">
+                <br>
+                <label for="status">Status:</label>
+                <select id="status" name="status" required class="form-control">
+                    {% for status in status_list %}
+                    <option value="{{ status.id }}" {% if livro and livro.id_status == status.id %}selected{% endif %}>{{ status.status }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                {% if livro %}
+                <input type="submit" name="update" value="Atualizar Livro" class="btn-blue">
+                {% else %}
+                <input type="submit" value="Cadastrar Livro" class="btn-blue">
+                {% endif %}
+            </form>
+        </div>
+
+        <div class="pesquisa-livro">
+            <h2>Pesquisar Livro para Editar</h2>
+            <form method="POST">
+                <label for="nome">Nome do Livro:</label>
+                <input type="text" id="nome" name="nome" required class="form-control">
+                <input type="submit" name="pesquisar" value="Pesquisar" class="btn-blue">
+            </form>
+
+            <!-- Exibir os livros encontrados -->
+            {% if livros %}
+            <h2>Livros Encontrados:</h2>
+            <ul class="livros-list">
+                {% for livro in livros %}
+                <li>
+                    <strong>{{ livro.nome }}</strong> - {{ livro.ano }} - {{ livro.autor }}
+                    <br>
+                    <a href="{{ url_for('cadastrar_livro', id=livro.id) }}">Editar</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% elif not livro %}
+            <p>Nenhum livro encontrado.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

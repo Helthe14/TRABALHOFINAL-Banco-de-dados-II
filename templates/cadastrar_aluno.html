@@ -1,0 +1,65 @@
+<!-- templates/cadastrar_aluno.html -->
+{% extends 'base.html' %}
+
+{% block title %}Cadastro de Aluno{% endblock %}
+
+{% block content %}
+<div class="container main-container">
+    <div class="form-container">
+        <h2>Formulário de Cadastro / Atualização de Aluno</h2>
+
+        <!-- Exibe a mensagem de sucesso ou erro -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="message">{{ messages[0] }}</div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Formulário de edição de aluno -->
+        <form method="POST" class="edit-form">
+            <input type="hidden" name="id" value="{{ aluno.id if aluno else '' }}">
+
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="{{ aluno.nome if aluno else '' }}" required class="form-control">
+
+            <label for="matricula">Matrícula:</label>
+            <input type="text" id="matricula" name="matricula" value="{{ aluno.matricula if aluno else '' }}" required class="form-control">
+
+            <label for="curso">Curso:</label>
+            <input type="text" id="curso" name="curso" value="{{ aluno.curso if aluno else '' }}" required class="form-control">
+
+            <label for="nivel">Nível:</label>
+            <input type="text" id="nivel" name="nivel" value="{{ aluno.nivel if aluno else '' }}" required class="form-control">
+
+            <input type="submit" value="Cadastrar" class="btn-blue">
+        </form>
+    </div>
+
+    <div class="info-container">
+        <h2>Lista de Alunos</h2>
+
+        <!-- Formulário de pesquisa -->
+        <form method="GET" class="search-form">
+            <input type="text" name="search" placeholder="Pesquisar por nome ou matrícula" value="{{ search_term }}" class="form-control">
+            <button type="submit" class="btn-blue">Pesquisar</button>
+        </form>
+
+        {% if alunos %}
+        <ul class="aluno-list">
+            {% for aluno in alunos %}
+            <li>
+                <a href="{{ url_for('cadastrar_aluno', id=aluno.id) }}">
+                    {{ aluno.nome }} - {{ aluno.matricula }} - {{ aluno.curso }} - {{ aluno.nivel }}
+                </a>
+                <form method="POST" action="{{ url_for('deletar_aluno', id=aluno.id) }}" class="edit-link-form">
+                    <button type="submit" class="btn-blue">Deletar</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Nenhum aluno encontrado.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

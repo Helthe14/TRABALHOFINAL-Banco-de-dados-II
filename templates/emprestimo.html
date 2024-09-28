@@ -1,0 +1,68 @@
+<!-- templates/emprestimo.html -->
+{% extends 'base.html' %}
+
+{% block title %}Emprestar Livro{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Emprestar Livro</h1>
+
+    <!-- Exibe a mensagem de sucesso ou erro -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="message {{ messages[0][0] }}">
+                {{ messages[0][1] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Formulário de pesquisa de livro -->
+    <form method="POST" class="search-form">
+        <input type="text" name="termo" placeholder="Digite o nome do livro" required class="form-control">
+        <button type="submit" name="pesquisar" class="btn-blue">Pesquisar Livro</button>
+    </form>
+
+    <!-- Resultados da pesquisa -->
+    {% if resultados %}
+        <h2>Resultados da Pesquisa:</h2>
+        <ul class="livros-list">
+            {% for livro in resultados %}
+            <li>
+                <strong>{{ livro.nome }}</strong> - {{ livro.autor }} ({{ livro.ano }}) - Status: {{ livro.status.status }}
+                <!-- Botão de emprestar se o livro estiver disponível -->
+                {% if livro.id_status == 1 %}
+                    <form method="POST" class="custom-form">
+                        <input type="hidden" name="livro_id" value="{{ livro.id }}">
+                        <label for="aluno_matricula">Matrícula do Aluno:</label>
+                        <input type="text" id="aluno_matricula" name="aluno_matricula" placeholder="Digite a matrícula do aluno" required class="form-control">
+                        <button type="submit" name="emprestar" class="btn-blue">Emprestar</button>
+                    </form>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    {% elif termo %}
+        <p>Nenhum resultado encontrado para "{{ termo }}"</p>
+    {% endif %}
+
+    <!-- Lista de livros disponíveis -->
+    <h2>Livros Disponíveis</h2>
+    <ul class="livros-list">
+        {% for livro in livros_disponiveis %}
+        <li>
+            <strong>{{ livro.nome }}</strong> - {{ livro.autor }} ({{ livro.ano }})
+            <form method="POST" class="custom-form">
+                <input type="hidden" name="livro_id" value="{{ livro.id }}">
+                <label for="aluno_matricula">Matrícula do Aluno:</label>
+                <input type="text" id="aluno_matricula" name="aluno_matricula" placeholder="Digite a matrícula do aluno" required class="form-control">
+                <button type="submit" name="emprestar" class="btn-blue">Emprestar</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% if not ver_mais %}
+    <a href="{{ url_for('emprestar_livro', ver_mais=True) }}" class="btn-blue">Ver mais</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,442 @@
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Estilo geral do corpo */
+body {
+    background-color: #333;
+    color: #333;
+    font-size: 16px;
+}
+
+/* Estilo do cabeçalho */
+header {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+h1 {
+    color: #007BFF; /* Altera a cor do texto para branco */
+}
+/* Estilo do menu de navegação */
+nav {
+    background-color: #007BFF;
+}
+
+nav .container {
+    display: flex;
+    justify-content: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 15px 20px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #6edbff;
+}
+
+/* Estilo do conteúdo principal */
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+.info-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    
+}
+.btn-blue {
+    background-color: #007bff; /* Azul */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3; /* Azul escuro */
+}
+/* Estilo dos títulos e textos */
+.container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #007BFF;
+}
+
+.container p {
+    color: rgb(255, 255, 255);
+}
+
+/* Estilo do rodapé */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 5px 5px;
+    position: relative; 
+    width: 100%;
+    bottom: 0;
+}
+
+
+/* Estilo dos formulários */
+.form-container,
+.edit-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+}
+
+/* Estilo dos títulos nos formulários */
+.form-container h2,
+.edit-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #007BFF;
+}
+
+/* Estilo dos labels nos formulários */
+.form-container label,
+.edit-form label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #000000;
+    margin-top: 15px;
+}
+
+/* Estilo dos campos de entrada e botão de envio */
+.form-container input[type="text"],
+.form-container input[type="submit"],
+.form-container select,
+.edit-form input[type="text"],
+.edit-form input[type="submit"],
+.edit-form select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    font-size: 1rem;
+}
+
+/* Estilo específico para campos de texto */
+.form-container input[type="text"],
+.edit-form input[type="text"] {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo específico para o botão de envio */
+.form-container input[type="submit"],
+.edit-form input[type="submit"] {
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efeito hover para o botão de envio */
+.form-container input[type="submit"]:hover,
+.edit-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo da mensagem de sucesso ou erro */
+.message {
+    background-color: #00c006;
+    color: #fdfdfd;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.message.error {
+    background-color: #ff4c4c; /* Cor vermelha para mensagens de erro */
+}
+
+
+/* Estilo da lista de livros */
+.livros-list {
+    list-style: none;
+    padding: 0;
+}
+
+.livros-list li {
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.livros-list li strong {
+    color: #007BFF;
+}
+
+/* Estilo da lista de livros emprestados */
+.livros-emprestados-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.livros-emprestados-list li {
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.livros-emprestados-list li strong {
+    color: #007BFF;
+}
+/* Estilo do botão Deletar */
+.livros-encontrados {
+    margin-bottom: 20px; /* Espaço abaixo da lista de livros */
+}
+
+.livros-list a,
+.livros-emprestados-list a {
+    color: #ffffff;
+    background-color: #007BFF; 
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 15px; /* Margem superior do botão */
+    display: inline-block; /* Para que as margens sejam aplicadas corretamente */
+}
+
+.livros-list a:hover,
+.livros-emprestados-list a:hover {
+    background-color: #35dc89;
+    color: #ffffff;
+}
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.gallery-item {
+    background-color: #343b42;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    width: calc(33.333% - 20px);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.gallery-item h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #007BFF;
+}
+
+.gallery-item p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #ffffff;
+}
+.gallery-item img {
+    max-width: 100px;
+    max-height: 150px;
+    margin-left: 20px;
+}
+
+/* Estilo do formulário de pesquisa */
+.search-form {
+    margin: 20px 0;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-form input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.search-form button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo do formulário de pesquisa */
+.search-form {
+    margin: 20px 0;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-form input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    margin-right: 10px;
+}
+
+.search-form button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Adiciona espaço acima do botão */
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Layout principal com duas colunas */
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Estilo do formulário de edição */
+.edit-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Estilo da lista de alunos */
+.info-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Estilo dos campos de entrada e botão de envio */
+.edit-form input[type="text"],
+.edit-form input[type="submit"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    font-size: 1rem;
+}
+
+.edit-form input[type="text"] {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form input[type="submit"] {
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo da lista de alunos */
+.aluno-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.aluno-list li {
+    margin-bottom: 10px;
+}
+
+.aluno-list a {
+    text-decoration: none;
+    color: #030303;
+    font-size: 1rem;
+}
+
+.aluno-list a:hover {
+    text-decoration: underline;
+}
+/* Estilo do formulário customizado */
+.custom-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+
+

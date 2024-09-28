@@ -1,0 +1,26 @@
+<!-- templates/livros_emprestados.html -->
+{% extends 'base.html' %}
+
+{% block title %}Livros Emprestados{% endblock %}
+
+{% block content %}
+<h1>Livros Emprestados</h1>
+<ul>
+    {% for emprestimo in emprestimos %}
+    <li>
+        <strong>Livro:</strong> {{ emprestimo.livro.nome }} <br>
+        <strong>Emprestado para:</strong> {{ emprestimo.aluno.nome }} <br>
+        <strong>Data do Empréstimo:</strong> {{ emprestimo.data }}
+    </li>
+    <br>
+    {% endfor %}
+</ul>
+
+<!-- Exemplo de formulário para emprestar livro -->
+<h2>Emprestar um Livro</h2>
+<form action="{{ url_for('emprestar_livro', livro_id=livro.id) }}" method="post">
+    <label for="aluno_id">Aluno:</label>
+    <input type="text" name="aluno_id" id="aluno_id" required>
+    <button type="submit">Emprestar</button>
+</form>
+{% endblock %}

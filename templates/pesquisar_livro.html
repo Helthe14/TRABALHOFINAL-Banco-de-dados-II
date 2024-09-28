@@ -1,0 +1,45 @@
+<!-- templates/pesquisar_livro.html -->
+{% extends 'base.html' %}
+
+{% block title %}Pesquisar Livro{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Pesquisar Livro</h1>
+
+    <!-- Formulário de pesquisa com classes CSS -->
+    <form method="POST" class="search-form">
+        <input type="text" name="termo" placeholder="Digite o nome do livro" required class="form-control">
+        <button type="submit" class="btn-blue">Pesquisar</button>
+    </form>
+
+    <!-- Resultado da pesquisa -->
+    {% if resultados %}
+        <h2>Resultados da Pesquisa:</h2>
+        <ul class="livros-list">
+            {% for livro in resultados %}
+            <li>
+                <strong>{{ livro.nome }}</strong> - {{ livro.autor }} ({{ livro.ano }}) - Status: {{ livro.status.status }}
+            </li>
+            {% endfor %}
+        </ul>
+    {% elif termo %}
+        <p>Nenhum resultado encontrado para "{{ termo }}"</p>
+    {% endif %}
+
+    <!-- Lista de todos os livros disponíveis -->
+    <h2>Livros Disponíveis</h2>
+    <ul class="livros-list">
+        {% for livro in livros_disponiveis %}
+        <li>
+            <strong>{{ livro.nome }}</strong> - {{ livro.autor }} ({{ livro.ano }}) - Status: Disponível
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Botão Ver Mais -->
+    {% if not ver_mais %}
+        <a href="{{ url_for('pesquisar_livro', ver_mais=True) }}" class="btn-blue">Ver Mais</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>{% block title %}Sistema de Biblioteca{% endblock %}</title>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <h1>Sistema de Biblioteca</h1>
+        </div>
+    </header>
+
+    <!-- Menu de navegação -->
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="{{ url_for('index') }}">Início</a></li>
+            <li><a href="{{ url_for('cadastrar_aluno') }}">Cadastro de Aluno</a></li>
+            <li><a href="{{ url_for('cadastrar_livro') }}">Cadastro de Livros</a></li>
+            <li><a href="{{ url_for('pesquisar_livro') }}">Pesquisar Livro</a></li>
+            <li><a href="{{ url_for('devolucao') }}">Devolução de Livros</a></li>
+            <li><a href="{{ url_for('emprestar_livro') }}">Emprestar Livro</a></li> 
+        </ul>
+    </div>
+</nav>
+
+
+    <!-- Conteúdo da página -->
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Biblioteca Central. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
